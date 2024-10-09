@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pysentence-similarity"
+version = "1.0.1"
+description = "pysentence-similarity this tool is designed to identify and find similarities between sentences and the base sentence in python language"
+authors = [
+    { name = "goldpulpy", email = "sawsani1928@gmail.com" }
+]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "tokenizers",
+    "onnxruntime-gpu",
+    "beautifulsoup4",
+    "platformdirs",
+    "h5py"
+]
+keywords = ["sentence similarity", "NLP", "natural language processing"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Natural Language :: English",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Intended Audience :: Developers",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/goldpulpy/pysentence-similarity"
+Repository = "https://github.com/goldpulpy/pysentence-similarity"
+Documentation = "https://github.com/goldpulpy/pysentence-similarity#readme"
+Issue = "https://github.com/goldpulpy/pysentence-similarity/issues"
+
