@@ -12,9 +12,9 @@ class TestStorage(unittest.TestCase):
         """Set up test data before each test."""
         self.sentences = [
             "This is a test sentence.",
-            "This is another sentence."
+            "This is another sentence.",
         ]
-        self.embeddings = [np.random.rand(3), np.random.rand(3)]
+        self.embeddings = [np.random.rand(3), np.random.rand(3),]
         self.storage = Storage(
             sentences=self.sentences,
             embeddings=self.embeddings
@@ -82,6 +82,38 @@ class TestStorage(unittest.TestCase):
         """Test index out of range."""
         with self.assertRaises(IndexError):
             self.storage[10]
+
+    def test_remove_by_index_valid(self) -> None:
+        """Test removing a sentence and embedding by valid index."""
+        self.storage.remove_by_index(1)
+        expected_sentences = ["This is a test sentence."]
+
+        self.assertEqual(self.storage.get_sentences(), expected_sentences)
+
+    def test_remove_by_index_out_of_range(self) -> None:
+        """Test removing a sentence and embedding by out-of-range index."""
+        with self.assertRaises(IndexError):
+            self.storage.remove_by_index(5)
+
+    def test_remove_by_index_boundary(self) -> None:
+        """Test removing the first and last elements."""
+        self.storage.remove_by_index(0)
+        expected_sentences_after_first = ["This is another sentence."]
+        self.assertEqual(
+            self.storage.get_sentences(),
+            expected_sentences_after_first
+        )
+
+    def test_remove_by_sentence_valid(self) -> None:
+        """Test removing a sentence and embedding by valid sentence."""
+        self.storage.remove_by_sentence("This is a test sentence.")
+        expected_sentences = ["This is another sentence."]
+        self.assertEqual(self.storage.get_sentences(), expected_sentences)
+
+    def test_remove_by_sentence_not_found(self) -> None:
+        """Test removing a sentence that does not exist."""
+        with self.assertRaises(ValueError):
+            self.storage.remove_by_sentence("non-existent sentence")
 
 
 if __name__ == "__main__":

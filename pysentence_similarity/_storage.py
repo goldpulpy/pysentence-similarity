@@ -136,6 +136,39 @@ class Storage:
         if save:
             self.save(filename)
 
+    def remove_by_index(self, index: int) -> None:
+        """
+        Remove the sentence and embedding at the specified index.
+
+        :param index: Index of the item to remove.
+        :type index: int
+        :raises IndexError: If the index is out of bounds.
+        :return: None
+        """
+        try:
+            removed_sentence = self._sentences.pop(index)
+            self._embeddings.pop(index)
+            logger.info("Removed sentence: %s", removed_sentence)
+        except IndexError as err:
+            logger.error("Index out of range: %s", err)
+            raise
+
+    def remove_by_sentence(self, sentence: str) -> None:
+        """
+        Remove the sentence and its corresponding embedding by sentence.
+
+        :param sentence: The sentence to remove.
+        :type sentence: str
+        :raises ValueError: If the sentence is not found in the storage.
+        :return: None
+        """
+        try:
+            index = self._sentences.index(sentence)
+            self.remove_by_index(index)
+        except ValueError as err:
+            logger.error("Sentence not found: %s", err)
+            raise
+
     def get_sentences(self) -> List[str]:
         """
         Get the list of sentences.
