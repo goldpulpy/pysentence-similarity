@@ -181,7 +181,7 @@ class Model:
         if self.model not in _support_models:
             raise ValueError(
                 f"Model '{self.model}' not supported. Must be one of "
-                f"{_support_models}."
+                f"{', '.join(_support_models)}."
             )
 
         valid_dtypes = {'fp32', 'fp16', 'int8'}
