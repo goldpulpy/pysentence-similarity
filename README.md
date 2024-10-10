@@ -38,15 +38,23 @@ Below are the models currently added to the special repository, including their 
 
 | Model                                 | Parameters | FP32   | FP16  | INT8  | Source link                                                                                 |
 | ------------------------------------- | ---------- | ------ | ----- | ----- | ------------------------------------------------------------------------------------------- |
+| paraphrase-albert-small-v2            | 11.7M      | 45MB   | 22MB  | 38MB  | [HF](https://huggingface.co/sentence-transformers/paraphrase-albert-small-v2) 🤗            |
 | all-MiniLM-L6-v2                      | 22.7M      | 90MB   | 45MB  | 23MB  | [HF](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) 🤗                      |
 | paraphrase-MiniLM-L6-v2               | 22.7M      | 90MB   | 45MB  | 23MB  | [HF](https://huggingface.co/sentence-transformers/paraphrase-MiniLM-L6-v2) 🤗               |
+| multi-qa-MiniLM-L6-cos-v1             | 22.7M      | 90MB   | 45MB  | 23MB  | [HF](https://huggingface.co/sentence-transformers/multi-qa-MiniLM-L6-cos-v1) 🤗             |
+| msmarco-MiniLM-L-6-v3                 | 22.7M      | 90MB   | 45MB  | 23MB  | [HF](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L-6-v3) 🤗                 |
 | all-MiniLM-L12-v2                     | 33.4M      | 127MB  | 65MB  | 32MB  | [HF](https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2) 🤗                     |
 | gte-small                             | 33.4M      | 127MB  | 65MB  | 32MB  | [HF](https://huggingface.co/thenlper/gte-small) 🤗                                          |
+| all-distilroberta-v1                  | 82.1M      | 313MB  | 157MB | 79MB  | [HF](https://huggingface.co/sentence-transformers/all-distilroberta-v1) 🤗                  |
 | all-mpnet-base-v2                     | 109M       | 418MB  | 209MB | 105MB | [HF](https://huggingface.co/sentence-transformers/all-mpnet-base-v2) 🤗                     |
+| multi-qa-mpnet-base-dot-v1            | 109M       | 418MB  | 209MB | 105MB | [HF](https://huggingface.co/sentence-transformers/multi-qa-mpnet-base-dot-v1) 🤗            |
 | paraphrase-multilingual-MiniLM-L12-v2 | 118M       | 449MB  | 225MB | 113MB | [HF](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2) 🤗 |
 | text2vec-base-multilingual            | 118M       | 449MB  | 225MB | 113MB | [HF](https://huggingface.co/shibing624/text2vec-base-multilingual) 🤗                       |
+| distiluse-base-multilingual-cased-v1  | 135M       | 514MB  | 257MB | 129MB | [HF](https://huggingface.co/sentence-transformers/distiluse-base-multilingual-cased-v1) 🤗  |
+| paraphrase-multilingual-mpnet-base-v2 | 278M       | 1.04GB | 530MB | 266MB | [HF](https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2) 🤗 |
 | gte-multilingual-base                 | 305M       | 1.17GB | 599MB | 324MB | [HF](https://huggingface.co/Alibaba-NLP/gte-multilingual-base) 🤗                           |
 | gte-large                             | 335M       | 1.25GB | 640MB | 321MB | [HF](https://huggingface.co/thenlper/gte-large) 🤗                                          |
+| all-roberta-large-v1                  | 355M       | 1.32GB | 678MB | 340MB | [HF](https://huggingface.co/sentence-transformers/all-roberta-large-v1) 🤗                  |
 | LaBSE                                 | 470M       | 1.75GB | 898MB | 450MB | [HF](https://huggingface.co/sentence-transformers/LaBSE) 🤗                                 |
 
 **pysentence-similarity** supports `FP32`, `FP16`, and `INT8` dtypes.
