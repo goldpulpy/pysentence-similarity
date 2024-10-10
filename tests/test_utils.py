@@ -2,7 +2,8 @@
 import unittest
 
 import numpy as np
-from pysentence_similarity import Model, compute_score
+from pysentence_similarity import Model
+from pysentence_similarity.utils import compute_score
 
 
 class TestModel(unittest.TestCase):
