@@ -6,9 +6,9 @@ setup(
     version="1.0.1",
     author="goldpulpy",
     author_email="sawsani1928@gmail.com",
-    description="pysentence-similarity this tool is designed to identify "
-    "and find similarities between sentences and the base sentence "
-    "in python language",
+    description="PySentence-Similarity is a tool designed to identify and "
+    "find similarities between sentences and a base sentence, expressed "
+    "as a percentage.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/goldpulpy/pysentence-similarity",

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pysentence-similarity"
 version = "1.0.1"
-description = "pysentence-similarity this tool is designed to identify and find similarities between sentences and the base sentence in python language"
+description = "PySentence-Similarity is a tool designed to identify and find similarities between sentences and a base sentence, expressed as a percentage."
 authors = [
     { name = "goldpulpy", email = "sawsani1928@gmail.com" }
 ]
