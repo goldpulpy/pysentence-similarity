@@ -178,6 +178,23 @@ class Storage:
         """
         return self._sentences
 
+    def get_embedding_by_sentence(self, sentence: str) -> np.ndarray:
+        """
+        Get the embedding for the specified sentence.
+
+        :param sentence: The sentence to get the embedding for.
+        :type sentence: str
+        :return: The embedding for the specified sentence.
+        :rtype: np.ndarray
+        :raises ValueError: If the sentence is not found in the storage.
+        """
+        try:
+            index = self._sentences.index(sentence)
+            return self._embeddings[index]
+        except ValueError as err:
+            logger.error("Sentence not found: %s", err)
+            raise
+
     def get_embeddings(self) -> List[np.ndarray]:
         """
         Get the list of embeddings.

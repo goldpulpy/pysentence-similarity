@@ -14,7 +14,7 @@ class TestStorage(unittest.TestCase):
             "This is a test sentence.",
             "This is another sentence.",
         ]
-        self.embeddings = [np.random.rand(3), np.random.rand(3),]
+        self.embeddings = [np.random.rand(3), np.random.rand(3)]
         self.storage = Storage(
             sentences=self.sentences,
             embeddings=self.embeddings
@@ -114,6 +114,18 @@ class TestStorage(unittest.TestCase):
         """Test removing a sentence that does not exist."""
         with self.assertRaises(ValueError):
             self.storage.remove_by_sentence("non-existent sentence")
+
+    def test_get_embedding_by_sentence(self) -> None:
+        """Test getting an embedding by sentence."""
+        embedding = self.storage.get_embedding_by_sentence(
+            "This is a test sentence."
+        )
+        self.assertIsInstance(embedding, np.ndarray)
+
+    def test_get_embedding_by_sentence_not_found(self) -> None:
+        """Test getting an embedding by sentence that does not exist."""
+        with self.assertRaises(ValueError):
+            self.storage.get_embedding_by_sentence("non-existent sentence")
 
 
 if __name__ == "__main__":
