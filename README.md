@@ -1,5 +1,7 @@
 <h1 align="center">PySentence-Similarity 😊</h1>
 <p align="center">
+    <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/pysentence-similarity">
+    <img alt="PyPI - Wheel" src="https://img.shields.io/pypi/wheel/pysentence-similarity">
     <a href="https://github.com/goldpulpy/pysentence-similarity/blob/main/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/goldpulpy/pysentence-similarity.svg?color=blue"></a>
     <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/goldpulpy/pysentence-similarity/package.yml">
     <img alt="GitHub forks" src="https://img.shields.io/github/forks/goldpulpy/pysentence-similarity">
