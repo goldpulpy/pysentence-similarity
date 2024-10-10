@@ -2,6 +2,7 @@
 <p align="center">
     <a href="https://github.com/goldpulpy/pysentence-similarity/blob/main/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/goldpulpy/pysentence-similarity.svg?color=blue"></a>
     <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/goldpulpy/pysentence-similarity/package.yml">
+    <img alt="GitHub forks" src="https://img.shields.io/github/forks/goldpulpy/pysentence-similarity">
 </p>
 
 ## Information
@@ -72,7 +73,8 @@ Let's define the similarity score as the percentage of how similar the sentences
 You can use CUDA 12.X by passing the `device='cuda'` parameter to the Model object; the default is `cpu`. If the device is not available, it will automatically be set to `cpu`.
 
 ```python
-from pysentence_similarity import Model, compute_score
+from pysentence_similarity import Model
+from pysentence_similarity.utils import compute_score
 
 # Create an instance of the model all-MiniLM-L6-v2; the default dtype is `fp32`
 model = Model("all-MiniLM-L6-v2", dtype="fp16")
@@ -131,6 +133,68 @@ embeddings = model.encode(sentences, pooling_function=max_pooling)
 ...
 ```
 
+### Search similar sentences 🔍
+
+```python
+from pysentence_similarity import Model
+from pysentence_similarity.utils import search_similar
+
+# Create an instance of the model
+model = Model("all-MiniLM-L6-v2", dtype="fp16")
+
+# Test text
+sentences = [
+    "Hello my name is Bob.",
+    "I love to eat pizza.",
+    "We are testing sentence similarity."
+    "Today is a sunny day.",
+    "London is the capital of England.",
+    "I am a student at Stanford University."
+]
+
+# Convert query sentence to embedding
+query_embedding = model.encode("What's the capital of England?")
+
+# Convert sentences to embeddings
+embeddings = model.encode(sentences)
+
+# Search similar sentences
+similar = search_similar(
+    query_embedding=query_embedding,
+    sentences=sentences,
+    embeddings=embeddings,
+    top_k=3  # number of similar sentences to return
+)
+
+# Print similar sentences
+for idx, (sentence, score) in enumerate(similar, start=1):
+    print(f"{idx}: {sentence} ({score})")
+
+# Output prints:
+# 1: London is the capital of England. (0.81)
+# 2: Hello my name is Bob. (0.06)
+# 3: I love to eat pizza. (0.05)
+```
+
+With use storage
+
+```python
+from pysentence_similarity import Model, Storage
+from pysentence_similarity.utils import search_similar
+
+model = Model("all-MiniLM-L6-v2", dtype="fp16")
+query_embedding = model.encode("What's the capital of England?")
+
+storage = Storage.load("my_storage.h5")
+
+similar = search_similar(
+    query_embedding=query_embedding,
+    storage=storage,
+    top_k=3
+)
+...
+```
+
 ### Splitting ✂️
 
 ```python
@@ -185,7 +249,8 @@ storage.save("my_storage.h5")
 Load from the storage
 
 ```python
-from pysentence_similarity import Model, Storage, compute_score
+from pysentence_similarity import Model, Storage
+from pysentence_similarity.utils import compute_score
 
 # Create an instance of the model and storage
 model = Model("all-MiniLM-L6-v2", dtype="fp16")
