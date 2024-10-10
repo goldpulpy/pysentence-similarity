@@ -3,6 +3,7 @@
 import os
 import time
 import logging
+import copy
 from typing import List, Union, Callable
 
 import onnxruntime as ort
@@ -37,13 +38,23 @@ class Model:
         """
         Initialize the sentence similarity task model.
 
+        This constructor initializes the necessary components to load a model 
+        for sentence similarity tasks, including the model, tokenizer, and the 
+        device configurations.
+
         :param model: The name of the model to be used.
         :type model: str
-        :param dtype: The dtype of the model ('fp32', 'fp16', 'int8').
+        :param dtype: The data type of the model. Options include 'fp32' for 
+        32-bit floating point, 'fp16' for 16-bit floating point, and 'int8' for 
+        8-bit integer. Default is 'fp32'.
         :type dtype: str
-        :param cache_dir: Directory to cache the model and tokenizer.
+        :param cache_dir: The directory where the model and tokenizer should be 
+        cached. If not provided, a default cache directory is used based on 
+        the package name.
         :type cache_dir: str
-        :param device: Device to use for inference ('cuda', 'cpu').
+        :param device:  The device to use for inference. Options include 'cuda' 
+        for GPU acceleration and 'cpu' for running on the CPU. 
+        Default is 'cpu'.
         :type device: str
         :raises ValueError: If the model or tokenizer cannot be loaded.
         """
@@ -56,8 +67,8 @@ class Model:
 
         try:
             self._providers = self._get_providers()
-            self._tokenizer = self._load_tokenizer()
             self._session = self._load_model()
+            self._tokenizer = self._load_tokenizer()
         except Exception as err:
             logger.error("Error initializing model: %s", err)
             raise
@@ -77,7 +88,11 @@ class Model:
         pooling_function: Callable = mean_pooling,
         progress_bar: bool = False
     ) -> Union[np.ndarray, List[np.ndarray]]:
-        """Convert a single sentence to an embedding vector.
+        """Convert a single sentence or a list of sentences to an embedding 
+        vector.
+
+        This method takes one or more sentences as input and converts them 
+        into embedding vectors using a specified pooling function.
 
         :param sentences: Sentence or list of sentences to convert.
         :type sentences: Union[str, List[str]]
@@ -320,8 +335,14 @@ class Model:
         """Return a string representation of the Model object."""
         return self.__str__()
 
-    def __copy__(self):
+    def __copy__(self) -> "Model":
         """Create a shallow copy of the Model object."""
         new_instance = self.__class__.__new__(self.__class__)
         new_instance.__dict__.update(self.__dict__)
         return new_instance
+
+    def __deepcopy__(self, memo) -> "Model":
+        """
+        Create a deep copy of the Model object.
+        """
+        return copy.deepcopy(self, memo)

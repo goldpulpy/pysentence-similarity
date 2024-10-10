@@ -8,7 +8,19 @@ def max_pooling(
     attention_mask: List[int]
 ) -> np.ndarray:
     """
-    Perform max pooling on token embeddings.
+    Perform max pooling on token embeddings, using an attention mask to ignore 
+    padding tokens.
+
+    This function takes in token embeddings (e.g., from a transformer model's 
+    output) and an attention mask and applies a max pooling operation across 
+    the token embeddings for each sentence. The attention mask ensures that 
+    padding tokens (which have a mask value of 0) are ignored in the pooling 
+    operation.
+
+    Max pooling selects the maximum value across the embedding dimension for 
+    each token, after multiplying the embeddings by the attention mask. This 
+    results in a pooled embedding representing the entire input sentence.
+
 
     :param model_output: Model output (token embeddings).
     :type model_output: np.ndarray
@@ -28,7 +40,14 @@ def mean_pooling(
     attention_mask: List[int]
 ) -> np.ndarray:
     """
-    Perform mean pooling on token embeddings.
+    Perform mean pooling on token embeddings, using an attention mask to ignore 
+    padding tokens.
+
+    This function computes the mean (average) of the token embeddings for each 
+    sentence, ignoring the padding tokens by using an attention mask. The 
+    attention mask helps in weighting the valid tokens during pooling and 
+    ensures that the padding tokens (marked as 0 in the mask) are excluded from 
+    the average computation.
 
     :param model_output: Model output (token embeddings).
     :type model_output: np.ndarray
@@ -51,7 +70,14 @@ def min_pooling(
     attention_mask: List[int]
 ) -> np.ndarray:
     """
-    Perform min pooling on token embeddings.
+    Perform min pooling on token embeddings, using an attention mask to ignore 
+    padding tokens.
+
+    This function computes the minimum of the token embeddings for each 
+    sentence, while ignoring padding tokens by utilizing an attention mask. The 
+    attention mask ensures that tokens marked as padding (with a value of 0) 
+    are not considered in the min pooling operation, effectively allowing the 
+    computation to focus only on valid tokens.
 
     :param model_output: Model output (token embeddings).
     :type model_output: np.ndarray

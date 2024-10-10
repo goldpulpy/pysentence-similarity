@@ -15,8 +15,6 @@ logger = logging.getLogger("pysentence-similarity:splitter")
 class Splitter:
     """
     A class to split text into sentences.
-    Supports splitting by periods, exclamation marks, question marks, and
-    newline characters.
     """
 
     def __init__(
@@ -25,7 +23,10 @@ class Splitter:
         preserve_markers: bool = False,
     ) -> None:
         """
-        Initializes the Splitter object.
+        Initializes the Splitter object, which is used to split a given text 
+        based on specific characters or markers. This class allows flexible 
+        splitting based on one or more characters and provides the option to 
+        preserve these markers in the split result.
 
         :param markers_to_split: A string or list of characters (e.g., 
         punctuation marks) used to split the text. Default is a newline 
@@ -51,7 +52,13 @@ class Splitter:
         text: str,
     ) -> List[str]:
         """
-        Splits the given text into sentences based on punctuation and newlines.
+        Splits the given text into sentences based on specified punctuation and 
+        newlines.
+
+        This method uses regular expressions to identify splitting points in 
+        the input text. It can preserve split markers (such as punctuation) 
+        based on the `preserve_markers` attribute set during initialization.
+
 
         :param text: The input text to split.
         :type text: str
@@ -93,8 +100,12 @@ class Splitter:
         file_path: str,
     ) -> List[str]:
         """
-        Splits the contents of a txt file into sentences based on punctuation
-        and newlines.
+        Splits the contents of a text file into sentences based on specified 
+        punctuation and newlines.
+
+        This method reads the entire content of the specified text file and 
+        utilizes the `split_from_text` method to split the content into 
+        sentences. It expects the file to be encoded in UTF-8.
 
         :param file_path: The path to the file to split.
         :type file_path: str
@@ -126,6 +137,10 @@ class Splitter:
         """
         Fetches the content from a URL, removes HTML tags, and splits the
         cleaned text into sentences.
+
+        This method retrieves the content from the provided URL, removes all
+        HTML tags, and splits the remaining plain text into sentences based on 
+        the specified split markers.
 
         :param url: The URL of the webpage to split.
         :type url: str
@@ -165,6 +180,11 @@ class Splitter:
         """
         Reads a CSV file and splits the text from specified columns into
         sentences.
+
+        This method reads the contents of a CSV file, extracts text from the 
+        specified columns, and then splits the text into sentences based on 
+        the markers defined in the `Splitter` object. It can handle multiple 
+        columns and combines the results into a single list of sentences.
 
         :param file_path: The path to the CSV file to read.
         :type file_path: str
@@ -233,6 +253,12 @@ class Splitter:
     def split_from_json(self, file_path: str, keys: List[str]) -> List[str]:
         """
         Reads a JSON file and splits text from specified keys into sentences.
+
+        This method processes a JSON file by extracting text values from 
+        specified keys. The extracted text is then split into sentences based 
+        on the markers defined in the `Splitter` object. It can handle nested 
+        JSON structures and recursively extract values from deeply nested 
+        objects.
 
         :param file_path: The path to the JSON file to read.
         :type file_path: str

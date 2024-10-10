@@ -1,6 +1,7 @@
 """Class to store embeddings in memory."""
 import logging
-from typing import List, Optional, Union
+import copy
+from typing import List, Optional, Union, Tuple
 
 import h5py
 import numpy as np
@@ -25,6 +26,10 @@ class Storage:
         """
         Initialize the storage class.
 
+        This constructor initializes an instance of the storage class, allowing 
+        for the optional provision of a list of sentences and their 
+        corresponding embeddings.
+
         :param sentences: List of sentences.
         :type sentences: List[str], optional
         :param embeddings: List of embeddings.
@@ -41,7 +46,9 @@ class Storage:
         """
         Save the embeddings and sentences to a file.
 
-        Save the embeddings and sentences to a file.
+        This method saves the embeddings and sentences into an HDF5 file format 
+        using the h5py library. It validates the data before saving to ensure 
+        that it is in the correct format.
 
         :param filename: The name of the file to save the embeddings to.
         :type filename: str
@@ -67,6 +74,10 @@ class Storage:
         """
         Factory method to load the embeddings and sentences from a file and
         return a new Storage instance.
+
+        This method reads the embeddings and sentences from an HDF5 file 
+        using the h5py library. It constructs and returns a new instance of 
+        the Storage class with the loaded data.
 
         :param filename: The name of the file to load the embeddings from.
         :type filename: str
@@ -99,7 +110,11 @@ class Storage:
         filename: str = None
     ) -> None:
         """
-        Add a new sentences and embeddings to the storage.
+        Add new sentences and embeddings to the storage.
+
+        This method appends new sentences and their corresponding embeddings 
+        to the internal storage. If specified, it can also save the updated 
+        data to a file.
 
         :param sentence: The sentence to add.
         :type sentence: Union[str, List[str]]
@@ -140,6 +155,10 @@ class Storage:
         """
         Remove the sentence and embedding at the specified index.
 
+        This method removes a sentence and its corresponding embedding 
+        from the storage based on the provided index. If the index is 
+        out of range, it raises an IndexError.
+
         :param index: Index of the item to remove.
         :type index: int
         :raises IndexError: If the index is out of bounds.
@@ -157,6 +176,10 @@ class Storage:
         """
         Remove the sentence and its corresponding embedding by sentence.
 
+        This method searches for a specific sentence in the storage and 
+        removes it along with its corresponding embedding. If the sentence 
+        is not found, it raises a ValueError.
+
         :param sentence: The sentence to remove.
         :type sentence: str
         :raises ValueError: If the sentence is not found in the storage.
@@ -173,6 +196,8 @@ class Storage:
         """
         Get the list of sentences.
 
+        This method retrieves the stored sentences from the storage. 
+
         :return: The list of sentences.
         :rtype: List[str]
         """
@@ -181,6 +206,10 @@ class Storage:
     def get_embedding_by_sentence(self, sentence: str) -> np.ndarray:
         """
         Get the embedding for the specified sentence.
+
+        This method retrieves the stored embedding corresponding to the given 
+        sentence.
+
 
         :param sentence: The sentence to get the embedding for.
         :type sentence: str
@@ -198,6 +227,8 @@ class Storage:
     def get_embeddings(self) -> List[np.ndarray]:
         """
         Get the list of embeddings.
+
+        This method retrieves all stored embeddings.
 
         :return: The list of embeddings.
         :rtype: List[np.ndarray]
@@ -252,11 +283,17 @@ class Storage:
         new_instance.__dict__.update(self.__dict__)
         return new_instance
 
+    def __deepcopy__(self, memo) -> "Storage":
+        """
+        Create a deep copy of the Storage object.
+        """
+        return copy.deepcopy(self, memo)
+
     def __len__(self) -> int:
         """Return the number of sentences."""
         return len(self._sentences)
 
-    def __getitem__(self, index: int) -> List[Union[str, np.ndarray]]:
+    def __getitem__(self, index: int) -> Tuple[str, np.ndarray]:
         """
         Get the sentence and embedding at the specified index.
 
@@ -266,7 +303,7 @@ class Storage:
         :raises IndexError: If the index is out of bounds.
         """
         try:
-            return [self._sentences[index], self._embeddings[index]]
+            return self._sentences[index], self._embeddings[index]
         except IndexError as e:
             logger.error("Index out of range: %s", e)
             raise

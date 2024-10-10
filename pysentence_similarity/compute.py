@@ -10,7 +10,16 @@ def cosine(
     embedding_1: np.ndarray,
     embedding_2: np.ndarray
 ) -> float:
-    """Compute cosine similarity between two embedding vectors.
+    """
+    Compute cosine similarity between two embedding vectors.
+
+    Cosine similarity is a measure of similarity between two non-zero vectors
+    of an inner product space that measures the cosine of the angle between 
+    them.
+    It is defined as the dot product of the vectors divided by the product of 
+    their magnitudes (norms). The value ranges from -1 to 1, where 1 indicates 
+    that the vectors are identical, 0 indicates orthogonality, and -1 indicates 
+    opposite directions.
 
     :param embedding_1: First embedding vector.
     :type embedding_1: np.ndarray
@@ -35,6 +44,14 @@ def euclidean(
 ) -> float:
     """Compute Euclidean distance between two embedding vectors.
 
+    The Euclidean distance is a measure of the straight-line distance between 
+    two points in Euclidean space. It is calculated as the square root of the 
+    sum of the squared differences between corresponding elements of the 
+    vectors.
+    This distance metric is commonly used in various machine learning and
+    data analysis tasks to quantify similarity or dissimilarity between data 
+    points.
+
     :param embedding_1: First embedding vector.
     :type embedding_1: np.ndarray
     :param embedding_2: Second embedding vector.
@@ -56,6 +73,15 @@ def manhattan(
 ) -> float:
     """Compute Manhattan distance between two embedding vectors.
 
+    The Manhattan distance, also known as L1 distance or city block distance, 
+    measures the distance between two points in a grid-based system by 
+    calculating the sum of the absolute differences of their coordinates. 
+    It is defined as the sum of the absolute differences between corresponding 
+    elements of the vectors. 
+
+    This distance metric is useful in various machine learning applications and 
+    optimization problems.
+
     :param embedding_1: First embedding vector.
     :type embedding_1: np.ndarray
     :param embedding_2: Second embedding vector.
@@ -76,6 +102,14 @@ def jaccard(
     embedding_2: np.ndarray
 ) -> float:
     """Compute Jaccard similarity between two embedding vectors.
+
+    The Jaccard similarity coefficient measures the similarity between two sets 
+    by comparing the size of their intersection to the size of their union. 
+    For two embedding vectors, the Jaccard similarity is calculated as the 
+    sum of the minimum values (intersection) divided by the sum of the maximum 
+    values (union) for corresponding elements of the vectors. This metric 
+    is particularly useful in applications such as clustering and information 
+    retrieval where the similarity between sets is of interest.
 
     :param embedding_1: First embedding vector.
     :type embedding_1: np.ndarray
@@ -100,6 +134,13 @@ def pearson(
 ) -> float:
     """Compute Pearson correlation between two embedding vectors.
 
+    The Pearson correlation coefficient measures the linear correlation 
+    between two variables, ranging from -1 to 1. A coefficient of 1 indicates 
+    a perfect positive linear relationship, 0 indicates no linear correlation, 
+    and -1 indicates a perfect negative linear relationship. This metric is 
+    commonly used in statistics to determine the strength and direction of a 
+    linear relationship between two data sets.
+
     :param embedding_1: First embedding vector.
     :type embedding_1: np.ndarray
     :param embedding_2: Second embedding vector.
@@ -121,6 +162,16 @@ def minkowski(
     p: int = 3
 ) -> float:
     """Compute Minkowski distance between two embedding vectors.
+
+    The Minkowski distance is a generalization of both the Euclidean and 
+    Manhattan distances, defined as the p-th root of the sum of the absolute 
+    differences of the coordinates raised to the p-th power. 
+    The Minkowski distance becomes:
+    - Euclidean distance when p = 2
+    - Manhattan distance when p = 1
+
+    The parameter p controls the 'order' of the distance metric. A higher value 
+    of p emphasizes larger differences between dimensions.
 
     :param embedding_1: First embedding vector.
     :type embedding_1: np.ndarray
@@ -144,6 +195,13 @@ def hamming(
     embedding_2: np.ndarray
 ) -> float:
     """Compute Hamming distance between two embedding vectors.
+
+    The Hamming distance measures the proportion of positions at which 
+    the corresponding elements of two vectors are different. It is 
+    commonly used for comparing binary strings or categorical data 
+    and is defined as the number of differing elements divided by the 
+    total number of elements. This distance metric is particularly 
+    useful in error detection and correction codes.
 
     :param embedding_1: First embedding vector.
     :type embedding_1: np.ndarray
@@ -171,6 +229,12 @@ def kl_divergence(
     """Compute Kullback-Leibler divergence between two probability 
     distributions.
 
+    The Kullback-Leibler (KL) divergence is a measure of how one probability 
+    distribution diverges from a second, expected probability distribution. 
+    It quantifies the information lost when one distribution is used to 
+    approximate another. The KL divergence is always non-negative and is 
+    zero if and only if the two distributions are identical.
+
     :param embedding_1: First probability distribution.
     :param embedding_2: Second probability distribution.
     :return: KL divergence.
@@ -195,6 +259,13 @@ def chebyshev(
 ) -> float:
     """Compute Chebyshev distance between two embedding vectors.
 
+    The Chebyshev distance, also known as the maximum metric, 
+    measures the maximum absolute difference between the components 
+    of two vectors. It is defined as the greatest of the absolute 
+    differences along any coordinate dimension. This distance 
+    metric is particularly useful in scenarios where you want to 
+    focus on the largest difference between dimensions.
+
     :param embedding_1: First embedding vector.
     :type embedding_1: np.ndarray
     :param embedding_2: Second embedding vector.
@@ -216,8 +287,15 @@ def bregman(
     f=np.square,
     grad_f=lambda x: 2 * x
 ) -> float:
-    """Compute Bregman divergence between two embedding vectors using a convex
+    """Compute Bregman divergence between two embedding vectors using a convex 
     function.
+
+    Bregman divergence is a generalization of various distance measures 
+    based on a convex function. It quantifies the difference between 
+    two points in terms of the convex function and its gradient. Bregman 
+    divergence is non-negative and equals zero only when the two points 
+    are the same. This metric is useful in various applications, 
+    including optimization and information theory.
 
     :param embedding_1: First embedding vector.
     :param embedding_2: Second embedding vector.
