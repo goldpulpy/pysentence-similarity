@@ -1,12 +1,12 @@
-"""Utils functions module."""
+"""Compute functions module."""
 import logging
 from typing import List, Union, Callable
 
 import numpy as np
 from tqdm import tqdm
 
-from .compute import cosine
-from ._storage import Storage
+from ..compute import cosine
+from .._storage import Storage
 
 # Set up logging
 logger = logging.getLogger("pysentence-similarity:utils")
@@ -99,8 +99,14 @@ def compute_score(
     rounding: int = 2,
     progress_bar: bool = False
 ) -> List[float]:
-    """Compute similarity scores between a source embedding and an array of
+    """Compute similarity scores between a source embedding and an array of 
     embeddings.
+
+    This function calculates similarity scores between a given source 
+    embedding (or a list of embeddings) and a set of embeddings using 
+    a specified similarity computation function. It allows for 
+    flexibility in the input types and provides options for rounding 
+    the scores and displaying a progress bar.
 
     :param source: Source embedding for comparison.
     :type source: Union[np.ndarray, List[np.ndarray]]

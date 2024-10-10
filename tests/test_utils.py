@@ -2,8 +2,8 @@
 import unittest
 
 import numpy as np
-from pysentence_similarity import Model
-from pysentence_similarity.utils import compute_score
+from pysentence_similarity import Model, Storage
+from pysentence_similarity.utils import compute_score, search_similar
 
 
 class TestModel(unittest.TestCase):
@@ -56,6 +56,60 @@ class TestModel(unittest.TestCase):
         self.assertEqual(len(score), 2)
         self.assertGreaterEqual(score[0][0], -1)
         self.assertLessEqual(score[0][0], 1)
+
+    def test_search_similar(self) -> None:
+        """Test search_similar returns the correct similar sentences."""
+        query_embedding = self.model.encode("This is a test.")
+        sentences = [
+            "This is another test.",
+            "This is a test.",
+            "This is yet another test."
+        ]
+        embeddings = self.model.encode(sentences)
+
+        results = search_similar(
+            query_embedding=query_embedding,
+            sentences=sentences,
+            embeddings=embeddings,
+            top_k=1
+        )
+
+        self.assertIsInstance(results, list)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0], ("This is a test.", 1.0))
+
+    def test_search_similar_no_sentences(self) -> None:
+        """Test search_similar with no sentences raises error."""
+        query_embedding = self.model.encode("This is a test.")
+        embeddings = np.zeros((0, 0))
+        with self.assertRaises(ValueError) as context:
+            search_similar(
+                query_embedding=query_embedding,
+                sentences=[],
+                embeddings=embeddings
+            )
+        self.assertEqual(str(context.exception), "No sentences provided.")
+
+    def test_search_similar_empty_embeddings(self) -> None:
+        """Test search_similar with no sentences raises error."""
+        query_embedding = self.model.encode("This is a test.")
+        with self.assertRaises(ValueError) as context:
+            search_similar(
+                query_embedding=query_embedding,
+                sentences=["This is a test."],
+                embeddings=[]
+            )
+        self.assertEqual(str(context.exception), "No embeddings provided.")
+
+    def test_search_similar_empty_storage(self) -> None:
+        """Test search_similar with empty storage raises error."""
+        query_embedding = self.model.encode("This is a test.")
+        empty_storage = Storage()
+        with self.assertRaises(ValueError):
+            search_similar(
+                query_embedding=query_embedding,
+                storage=empty_storage
+            )
 
 
 if __name__ == "__main__":
