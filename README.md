@@ -6,7 +6,7 @@
 
 ## Information
 
-**pysentence-similarity** is a tool designed to identify and find similarities between sentences and a base sentence, expressed as a percentage 📊. It compares the semantic value of each input sentence to the base sentence, providing a score that reflects how related or similar they are. This tool is useful for various natural language processing tasks such as clustering similar texts 📚, paraphrase detection 🔍 and textual consequence measurement 📈.
+**PySentence-Similarity** is a tool designed to identify and find similarities between sentences and a base sentence, expressed as a percentage 📊. It compares the semantic value of each input sentence to the base sentence, providing a score that reflects how related or similar they are. This tool is useful for various natural language processing tasks such as clustering similar texts 📚, paraphrase detection 🔍 and textual consequence measurement 📈.
 
 The models were converted to ONNX format to optimize and speed up inference. Converting models to ONNX enables cross-platform compatibility and optimized hardware acceleration, making it more efficient for large-scale or real-world applications 🚀.
 
@@ -57,7 +57,7 @@ Below are the models currently added to the special repository, including their 
 | all-roberta-large-v1                  | 355M       | 1.32GB | 678MB | 340MB | [HF](https://huggingface.co/sentence-transformers/all-roberta-large-v1) 🤗                  |
 | LaBSE                                 | 470M       | 1.75GB | 898MB | 450MB | [HF](https://huggingface.co/sentence-transformers/LaBSE) 🤗                                 |
 
-**pysentence-similarity** supports `FP32`, `FP16`, and `INT8` dtypes.
+**PySentence-Similarity** supports `FP32`, `FP16`, and `INT8` dtypes.
 
 - **FP32:** 32-bit floating-point format that provides high precision and a wide range of values.
 - **FP16:** 16-bit floating-point format, reducing memory consumption and computation time, with minimal loss of precision (typically less than 1%).
@@ -65,7 +65,7 @@ Below are the models currently added to the special repository, including their 
 
 ## Usage examples 📖
 
-### Sentence similarity score 📊
+### Compute similarity score 📊
 
 Let's define the similarity score as the percentage of how similar the sentences are to the original sentence (0.75 = 75%), default compute function is `cosine`
 
