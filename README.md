@@ -148,7 +148,7 @@ model = Model("all-MiniLM-L6-v2", dtype="fp16")
 sentences = [
     "Hello my name is Bob.",
     "I love to eat pizza.",
-    "We are testing sentence similarity."
+    "We are testing sentence similarity.",
     "Today is a sunny day.",
     "London is the capital of England.",
     "I am a student at Stanford University."
